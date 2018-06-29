@@ -1,27 +1,22 @@
+using System;
+
 namespace economia
 {
     public class Produto
     {
         public string Nome { get; }
+        public string Categoria { get; private set; }
         public decimal Preco { get; }
-        public int Votos { get; private set; }
-        public decimal Media { get; private set; }
 
-        public Produto(string nome, decimal preco, int votos=0, decimal media=0)
+        public Produto(string nome, string categoria, decimal preco)
         {
             Nome = nome;
+            Categoria = categoria;
             Preco = preco;
-            Votos = votos;
-            Media = media;
         }
 
-        public decimal Avaliar(decimal media)
-        {
-            var result = (media + (Votos * this.Media))/(Votos+1);
-            Media = result;
-            Votos+=1;
-
-            return result;
+        public override string ToString(){
+            return Nome;
         }
     }
 }
