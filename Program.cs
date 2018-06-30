@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 
+using economia.models;
+
 namespace economia
 {
     class Program
@@ -29,6 +31,9 @@ namespace economia
             Console.WriteLine("Compra: " );
             c.Compras.ForEach(Console.WriteLine);
             Console.WriteLine("Custo: " + c.Compras.Sum(item => item.Preco));
+
+            var dado = Dados.Csv.Split('\n')[0];
+            Console.WriteLine(dado);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace economia
+namespace economia.models
 {
     public class Compra
     {

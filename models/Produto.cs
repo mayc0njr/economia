@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace economia
+namespace economia.models
 {
     public class Produto
     {
