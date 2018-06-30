@@ -24,6 +24,7 @@ namespace economia
             c.Compras.ForEach(Console.WriteLine);
             Console.WriteLine("Filtro Arroz: ");
             c.Filter(c.Compras,"Arroz").ForEach(Console.WriteLine);
+            Console.ReadLine();
         }
     }
 }
