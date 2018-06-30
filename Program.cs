@@ -25,7 +25,7 @@ namespace economia
             Console.WriteLine("Compra: " );
             c.Compras.ForEach(Console.WriteLine);
             Console.WriteLine("Custo: " + c.Compras.Sum(item => item.Preco));
-            c.MelhorarCusto();
+            c.Compras = c.MelhorarCusto();
             Console.WriteLine("Compra: " );
             c.Compras.ForEach(Console.WriteLine);
             Console.WriteLine("Custo: " + c.Compras.Sum(item => item.Preco));

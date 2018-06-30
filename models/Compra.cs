@@ -42,7 +42,7 @@ namespace economia
             return lista.Where(item => item.Categoria.Equals(categoria)).ToList();
         }
 
-        public List<Produto> MelhorarCusto(){
+        public List<Produto> MelhorarCusto(bool melhorPossivel = false){
             var compras = Compras;
             var custoMaximo = CustoMaximo;
             //Ordenando por Categoria, e itens de mesma categoria por preco.
@@ -55,9 +55,8 @@ namespace economia
                 alterou = false;
                 for(var x=0 ; x < copia.Count ; x++)
                 {
-                    if(copia.Sum(i => i.Preco) < custoMaximo){
+                    if(!melhorPossivel && copia.Sum(i => i.Preco) < custoMaximo)
                         break;
-                    }
                     var item = copia[x];
                     if(categoria != item.Categoria){
                         mercado = Filter(Mercado, item.Categoria);
@@ -76,8 +75,10 @@ namespace economia
                     }
                 }
             }while(alterou);
-            Compras = copia;
             return copia;
+        }
+        public List<Produto> MelhorCustoPossivel(){
+            return MelhorarCusto(true);
         }
     }
 }
