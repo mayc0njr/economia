@@ -7,15 +7,16 @@ namespace economia
     {
         public decimal CustoMaximo { get ; set; }
 
+        public static List<Produto> Mercado { get; } = 
+            Mercado = new List<Produto>();
+
         public List<Produto> Compras { get; set; }
 
-        public Compra(decimal custoMaximo, List<Produto> produtos){
+        public Compra(decimal custoMaximo, List<Produto> produtos, List<Produto> mercado){
             CustoMaximo = custoMaximo;
             Compras = new List<Produto>();
-            foreach (var item in produtos)
-            {
-                Compras.Add(item);
-            }
+            produtos.ForEach(Compras.Add);
+            mercado.ForEach(Mercado.Add);
         }
         // Varargs aqui,
         // Passa quantos parametros do tipo Produto quiser.
