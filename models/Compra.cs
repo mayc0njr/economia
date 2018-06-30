@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace economia
 {
     public class Compra
@@ -41,28 +42,41 @@ namespace economia
             return lista.Where(item => item.Categoria.Equals(categoria)).ToList();
         }
 
-        public List<Produto> MelhorarCusto(List<Produto> compras, decimal custoMaximo){
+        public List<Produto> MelhorarCusto(){
+            var compras = Compras;
+            var custoMaximo = CustoMaximo;
             //Ordenando por Categoria, e itens de mesma categoria por preco.
             var copia = compras.OrderByDescending(item => item.Preco).OrderBy(item => item.Categoria).ToList();
             var categoria = "";
             List<Produto> mercado = null;
-            for(var x=0 ; x < copia.Count ; x++)
+            var alterou = false; //Se der uma iteração sem alterar nada, para de remover e retorna;
+            do
             {
-                if(copia.Sum(i => i.Preco) < custoMaximo)
-                    break;
-                var item = copia[x];
-                if(categoria != item.Categoria){
-                    mercado = Filter(Mercado, item.Categoria);
-                    //Lista de produtos da categoria do produto atual ordenada decrescente pelo preco.
-                    mercado = mercado.OrderBy(i => i.Preco).Reverse().ToList();
-                    categoria = item.Categoria;
-                }
-                foreach (var p in mercado)
+                alterou = false;
+                for(var x=0 ; x < copia.Count ; x++)
                 {
-                    
+                    if(copia.Sum(i => i.Preco) < custoMaximo){
+                        break;
+                    }
+                    var item = copia[x];
+                    if(categoria != item.Categoria){
+                        mercado = Filter(Mercado, item.Categoria);
+                        //Lista de produtos da categoria do produto atual ordenada decrescente pelo preco.
+                        mercado = mercado.OrderBy(i => i.Preco).Reverse().ToList();
+                        categoria = item.Categoria;
+                    }
+                    foreach (var p in mercado)
+                    {
+                        if(p.Preco < item.Preco)
+                        {
+                            copia[x] = p;
+                            alterou = true;
+                            break;
+                        }
+                    }
                 }
-            }
-
+            }while(alterou);
+            Compras = copia;
             return copia;
         }
     }
