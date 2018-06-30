@@ -13,6 +13,14 @@ namespace economia.models
 
         public List<Produto> Compras { get; set; }
 
+        public decimal CustoTotal
+        {
+            get
+            {
+                return Compras.Sum(item => item.Preco);
+            }
+        }
+
         public Compra(decimal custoMaximo, List<Produto> produtos, List<Produto> mercado){
             CustoMaximo = custoMaximo;
             Compras = new List<Produto>();
@@ -36,13 +44,27 @@ namespace economia.models
             return Compras.Sum(item => item.Preco);
         }
 
-
         // Filtra por categoria.
         public List<Produto> Filter(List<Produto> lista, string categoria){
             return lista.Where(item => item.Categoria.Equals(categoria)).ToList();
         }
-
-        public List<Produto> MelhorarCusto(bool melhorPossivel = false){
+        
+        public List<Produto> RemoveSuperfluos(List<Produto> compra, bool superbarato = false)
+        {
+            List<Produto> superfluos = compra.Where(item => item.IsSuperfluo).ToList();
+            List<Produto> obrigatorio = compra.Where(item => !item.IsSuperfluo).ToList();
+            var copia = new List<Produto>();
+            copia.AddRange(compra);
+            if(superbarato)
+                return obrigatorio;
+            while(copia.Sum(item => item.Preco) > CustoMaximo)
+            {
+                var copiaTemp = superfluos.OrderByDescending(item => item.Prioridade).ToList();
+                copia.Remove(copiaTemp[0]);
+            }
+            return copia;
+        }
+        public List<Produto> MelhorarCusto(bool melhorPossivel = false, bool superbarato = false){
             var compras = Compras;
             var custoMaximo = CustoMaximo;
             //Ordenando por Categoria, e itens de mesma categoria por preco.
@@ -75,10 +97,11 @@ namespace economia.models
                     }
                 }
             }while(alterou);
+            copia = RemoveSuperfluos(copia, superbarato);
             return copia;
         }
-        public List<Produto> MelhorCustoPossivel(){
-            return MelhorarCusto(true);
+        public List<Produto> MelhorCustoPossivel(bool superbarato = false){
+            return MelhorarCusto(true, superbarato);
         }
     }
 }
