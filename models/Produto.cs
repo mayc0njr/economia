@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace economia
 {
@@ -25,22 +26,18 @@ namespace economia
         }
     }
 
-    public class SortCategoria : IComparer
+    public class SortCategoria : IComparer<Produto>
     {
-        public int Compare(object x, object y)
+        public int Compare(Produto x, Produto y)
         {
-            var p1 = x as Produto;
-            var p2 = y as Produto;
-            return new CaseInsensitiveComparer().Compare(p1.Categoria, p2.Categoria);
+            return new CaseInsensitiveComparer().Compare(x.Categoria, y.Categoria);
         }
     }
-    public class SortPreco : IComparer
+    public class SortPreco : IComparer<Produto>
     {
-        public int Compare(object x, object y)
+        public int Compare(Produto x, Produto y)
         {
-            var p1 = x as Produto;
-            var p2 = y as Produto;
-            return new CaseInsensitiveComparer().Compare(p1.Preco, p2.Preco);
+            return new CaseInsensitiveComparer().Compare(x.Preco, y.Preco);
         }
     }
 }
