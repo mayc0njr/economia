@@ -24,7 +24,7 @@ namespace economia.models
         }
 
         public override string ToString(){
-            return $"{Nome, -20} R$ {Preco}";
+            return $"{Nome, -30} R$ {Preco}";
             // return String.Format(s, Nome, Preco);
         }
 

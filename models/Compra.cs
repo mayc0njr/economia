@@ -111,7 +111,7 @@ namespace economia.models
             StringBuilder sb = new StringBuilder();
             Compras.ForEach(item => sb.Append(item.ToString() + "\n"));
             sb.Append($"\nCusto Total: {Compras.Sum(item => item.Preco)}");
-            sb.Append($"\nCusto Máximo Desejado: {CustoMaximo}\n");
+            sb.Append($"\nCusto Máximo Desejado: {(CustoMaximo)}\n");
             return sb.ToString();
         }
     }

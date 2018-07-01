@@ -20,14 +20,18 @@ namespace economia.user
         public static decimal formatDecimal(string s)
         {
             var str = s;
+            if(s.Contains(','))
+                s.Replace(',','.');
             if(!s.Contains('.'))
+            {
                 str += ".00";
+            }
             else
             {
                 str += "00";
-                str = String.Format("{0:F2}", str);
             }
-            return Decimal.Parse(str);
+            str = String.Format("{0:F2}", str);
+            return Helper.ParseDecimal(str);
             // Console.WriteLine(dec.ToString("0.##"));
             // return Decimal.Parse(dec.ToString("0.##"));
             
@@ -60,7 +64,7 @@ namespace economia.user
             escolha=0;
             while(true)
             {
-                Console.WriteLine("O que você deseja fazer?");
+                Console.WriteLine("\nO que você deseja fazer?");
                 Console.WriteLine("1. Inserir Produto.");
                 Console.WriteLine("2. Remover Produto.");
                 Console.WriteLine("3. Gerar Sugestões");
@@ -117,7 +121,7 @@ namespace economia.user
         public static bool AceitarSugestao(){
             while(true)
             {
-                Console.WriteLine("Deseja aceitar a sugestão?");
+                Console.WriteLine("\nDeseja aceitar a sugestão?");
                 Console.WriteLine("1. Sim");
                 Console.WriteLine("2. Não");
                 Console.Write("Opção: ");
@@ -182,7 +186,7 @@ namespace economia.user
                 }
             }
                 endwhilegs:
-                Console.WriteLine("4. Voltando ao menu da compra.\n");
+                Console.WriteLine("Voltando ao menu da compra.\n");
                 return;
         }
         public static void Save(Compra compra)

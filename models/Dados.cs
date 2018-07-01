@@ -40,7 +40,7 @@ namespace economia.models
                 var produto = tipo.Split(",");
                 for (var y = 1; y < produto.Length - 1; y++)
                 {
-                    Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Decimal.Parse(produto[y]), Int32.Parse(produto[produto.Length - 1]));
+                    Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Helper.ParseDecimal(produto[y]), Int32.Parse(produto[produto.Length - 1]));
                     Compra.Mercado.Add(p);
                 }
             }
