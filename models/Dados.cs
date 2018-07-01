@@ -49,7 +49,11 @@ namespace economia.models
         public static string Salvar(string texto)
         {
             var arquivo = $"res{ps}Compra{Now}.txt";
-            File.WriteAllText(arquivo, texto);
+
+            var print = $"{texto}\n\n Relatório gerado em: {DateTime.Now.ToString("dd/MM/yyyy - hh:mm")}";
+
+
+            File.WriteAllText(arquivo, print);
             return arquivo;
         }
 
