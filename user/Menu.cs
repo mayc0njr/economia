@@ -187,7 +187,8 @@ namespace economia.user
         }
         public static void Save(Compra compra)
         {
-            Dados.Salvar(compra.ToString());
+            var arquivo = Dados.Salvar(compra.ToString());
+            Console.WriteLine($"Dados impresso em '{arquivo}'");
         }
         //Adiciona Produtos na lista de compras.
         public static void RemoveProdutos(Compra compra)

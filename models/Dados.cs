@@ -46,9 +46,11 @@ namespace economia.models
             }
         }
 
-        public static void Salvar(string texto)
+        public static string Salvar(string texto)
         {
-            File.WriteAllText($"res{ps}Compra{DateTime.Now}.txt", texto);
+            var arquivo = $"res{ps}Compra{DateTime.Now}.txt";
+            File.WriteAllText(arquivo, texto);
+            return arquivo;
         }
 
 
