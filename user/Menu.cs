@@ -148,7 +148,7 @@ namespace economia.user
                 Console.WriteLine("   *: As soluções boa e barata, removerão produtos supérfluos se o custo estiver acima do custo máximo");
                 Console.WriteLine("   desejado.");
                 Console.WriteLine("4. Imprimir Compra Atual.");
-                Console.WriteLine("5. Sair\n");
+                Console.WriteLine("5. Voltar\n");
                 Console.Write("Opção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 switch(escolha)
@@ -201,7 +201,7 @@ namespace economia.user
                     Console.WriteLine("[{0}] - {1}", x, compra.Compras[x]);
                 }
                 Console.WriteLine("Deseja remover qual produto?");
-                Console.Write("[-1] - Sair\nOpção: ");
+                Console.Write("[-1] - Voltar\nOpção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 if(escolha == -1)
                     break;
@@ -238,7 +238,7 @@ namespace economia.user
                     Console.WriteLine("[{0}] - {1}", x, Mercado[x]);
                 }
                 Console.WriteLine("Deseja adicionar qual produto?");
-                Console.Write("[-1] - Sair\nOpção: ");
+                Console.Write("[-1] - Voltar\nOpção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 if(escolha == -1)
                     break;

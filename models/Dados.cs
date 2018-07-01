@@ -48,9 +48,24 @@ namespace economia.models
 
         public static string Salvar(string texto)
         {
-            var arquivo = $"res{ps}Compra{DateTime.Now}.txt";
+            var arquivo = $"res{ps}Compra{Now}.txt";
             File.WriteAllText(arquivo, texto);
             return arquivo;
+        }
+
+        public static string Now
+        {
+            get
+            {
+                DateTime now = DateTime.Now;
+                var ano = now.Year.ToString();
+                var mes = now.Month.ToString();
+                var dia = now.Day.ToString();
+                var hor = now.Hour.ToString();
+                var min = now.Minute.ToString();
+                var sec = now.Second.ToString();
+                return $"{ano}-{mes}-{dia},{hor}-{min}-{sec}";
+            }
         }
 
 
