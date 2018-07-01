@@ -32,15 +32,14 @@ namespace economia.user
             while(true)
             {
                 read = Console.ReadLine();
-                custo = formatDecimal(read);
                 if(custo < 0)
                     Console.WriteLine("Digite um valor maior que 0!");
                 else
                     break;
+                custo = formatDecimal(read);
             };
             compra = new Compra(custo);
-
-
+            menuAlteracao(compra);
         }
         public static void menuAlteracao(Compra compra)
         {
@@ -53,6 +52,7 @@ namespace economia.user
                 Console.WriteLine("3. Gerar Sugestões");
                 Console.WriteLine("4. Imprimir Compra Atual.");
                 Console.WriteLine("5. Salvar e Sair");
+                escolha = Int32.Parse(Console.ReadLine());
                 switch (escolha)
                 {
                     case 1:

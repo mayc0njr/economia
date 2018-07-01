@@ -21,11 +21,10 @@ namespace economia.models
             }
         }
 
-        public Compra(decimal custoMaximo, List<Produto> produtos, List<Produto> mercado){
+        public Compra(decimal custoMaximo, List<Produto> produtos){
             CustoMaximo = custoMaximo;
             Compras = new List<Produto>();
             produtos.ForEach(Compras.Add);
-            mercado.ForEach(Mercado.Add);
         }
         // Varargs aqui,
         // Passa quantos parametros do tipo Produto quiser.

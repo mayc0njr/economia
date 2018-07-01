@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 using economia.models;
+using economia.user;
 
 namespace economia
 {
@@ -26,7 +27,9 @@ namespace economia
             // c.Add(p);
 
             // Compra.Mercado.AddRange(c);
+            
             Dados.InitializeProdutos();
+            Menu.MenuInicial();
         }
     }
 }

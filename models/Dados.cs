@@ -20,22 +20,28 @@ namespace economia.models
             }
         }
 
+        public static void printArray<T>(T[] t)
+        {
+            foreach (var item in t)
+            {
+            }
+        }
         public static void InitializeProdutos(){
             List<Produto> mercado = new List<Produto>();
             var produtos = Csv.Split("\n");
+            printArray<string>(produtos);
             var nome = produtos[0].Split(",");
+            printArray<string>(nome);
             for(var x=1 ; x < produtos.Length ; x++)
             {
                 var tipo = produtos[x];
                 var produto = tipo.Split(",");
-                for(var y=0 ; y < produto.Length-1 ; y++)
+                for(var y=1 ; y < produto.Length-1 ; y++)
                 {
-                    var preco = produto[y] + 'm';
-                    Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Decimal.Parse(preco), Int32.Parse(produto[produto.Length-1]));
-                    mercado.Add(p);
+                    Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Decimal.Parse(produto[y]), Int32.Parse(produto[produto.Length-1]));
+                    Compra.Mercado.Add(p);
                 }
             }
-            mercado.ForEach(Console.WriteLine);
         }
 
         
