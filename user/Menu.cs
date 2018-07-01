@@ -52,6 +52,7 @@ namespace economia.user
                 Console.WriteLine("3. Gerar Sugestões");
                 Console.WriteLine("4. Imprimir Compra Atual.");
                 Console.WriteLine("5. Salvar e Sair");
+                Console.Write("Opção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 switch (escolha)
                 {
@@ -105,6 +106,7 @@ namespace economia.user
                 Console.WriteLine("Deseja aceitar a sugestao?");
                 Console.WriteLine("1. Sim");
                 Console.WriteLine("2. Nao");
+                Console.Write("Opção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 switch (escolha)
                 {
@@ -123,7 +125,7 @@ namespace economia.user
             while(true)
             {
                 escolha=0;
-                Console.WriteLine("zn1. Solucao Boa*: Troca produtos por mais baratos até que a compra esteja abaixo do custo maximo");
+                Console.WriteLine("\n1. Solucao Boa*: Troca produtos por mais baratos até que a compra esteja abaixo do custo maximo");
                 Console.WriteLine("   ou todos produtos sejam os mais baratos");
                 Console.WriteLine("2. Solucao Barata*: Troca produtos por mais baratos até que todos estejam com o preço mais baixo");
                 Console.WriteLine("   possível.");
@@ -133,7 +135,7 @@ namespace economia.user
                 Console.WriteLine("   desejado.");
                 Console.WriteLine("4. Imprimir Compra Atual.");
                 Console.WriteLine("5. Sair\n");
-                Console.WriteLine("Opção: ");
+                Console.Write("Opção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 switch(escolha)
                 {
@@ -206,7 +208,7 @@ namespace economia.user
                         else
                             break;
                     }
-                    Console.WriteLine("Removido ({1}) {0}!\n", compra.Compras[escolha].Nome, qremove);
+                    Console.WriteLine("Removido ({1}) {0}!\n", premove, qremove);
                 }
             }
         }

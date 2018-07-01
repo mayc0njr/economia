@@ -50,6 +50,7 @@ namespace economia.models
         
         public List<Produto> RemoveSuperfluos(List<Produto> compra, bool superbarato = false)
         {
+            System.Console.WriteLine("Removendo superfluos.");
             List<Produto> superfluos = compra.Where(item => item.IsSuperfluo).ToList();
             List<Produto> obrigatorio = compra.Where(item => !item.IsSuperfluo).ToList();
             var copia = new List<Produto>();
@@ -58,7 +59,8 @@ namespace economia.models
                 return obrigatorio;
             while(copia.Sum(item => item.Preco) > CustoMaximo)
             {
-                var copiaTemp = superfluos.OrderByDescending(item => item.Prioridade).ToList();
+            System.Console.WriteLine("LOOP: " + copia.Sum(item => item.Preco) + "  CustoMaximo: " + CustoMaximo);
+                var copiaTemp = copia.OrderByDescending(item => item.Prioridade).ToList();
                 copia.Remove(copiaTemp[0]);
             }
             return copia;
