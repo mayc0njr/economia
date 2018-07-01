@@ -8,13 +8,14 @@ namespace economia.models
     class Dados
     {
         private static string csv = null;
+        private static char ps = Path.DirectorySeparatorChar;
         public static string Csv
         {
-            get{
-                if(csv == null)
+            get
+            {
+                if (csv == null)
                 {
-                    var s = Path.DirectorySeparatorChar;
-                    return File.ReadAllText("res" + s + "planilhaMercado.csv");
+                    return File.ReadAllText("res" + ps + "planilhaMercado.csv");
                 }
                 return csv;
             }
@@ -26,25 +27,31 @@ namespace economia.models
             {
             }
         }
-        public static void InitializeProdutos(){
+        public static void InitializeProdutos()
+        {
             List<Produto> mercado = new List<Produto>();
             var produtos = Csv.Split("\n");
             printArray<string>(produtos);
             var nome = produtos[0].Split(",");
             printArray<string>(nome);
-            for(var x=1 ; x < produtos.Length ; x++)
+            for (var x = 1; x < produtos.Length; x++)
             {
                 var tipo = produtos[x];
                 var produto = tipo.Split(",");
-                for(var y=1 ; y < produto.Length-1 ; y++)
+                for (var y = 1; y < produto.Length - 1; y++)
                 {
-                    Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Decimal.Parse(produto[y]), Int32.Parse(produto[produto.Length-1]));
+                    Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Decimal.Parse(produto[y]), Int32.Parse(produto[produto.Length - 1]));
                     Compra.Mercado.Add(p);
                 }
             }
         }
 
-        
-        
+        public static void Salvar(string texto)
+        {
+            File.WriteAllText($"res{ps}Compra{DateTime.Now}.txt", texto);
+        }
+
+
+
     }
 }

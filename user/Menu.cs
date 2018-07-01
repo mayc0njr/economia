@@ -19,7 +19,18 @@ namespace economia.user
         }
         public static decimal formatDecimal(string s)
         {
-            return Math.Round(Decimal.Parse(s), 2);
+            var str = s;
+            if(!s.Contains('.'))
+                str += ".00";
+            else
+            {
+                str += "00";
+                str = String.Format("{0:F2}", str);
+            }
+            return Decimal.Parse(str);
+            // Console.WriteLine(dec.ToString("0.##"));
+            // return Decimal.Parse(dec.ToString("0.##"));
+            
         }
         public static void MenuInicial()
         {
@@ -35,9 +46,12 @@ namespace economia.user
                 if(custo < 0)
                     Console.WriteLine("Digite um valor maior que 0!");
                 else
+                {
+                    custo = formatDecimal(read);
                     break;
-                custo = formatDecimal(read);
+                }
             };
+            Console.WriteLine("Custo Máximo Desejado: " + custo);
             compra = new Compra(custo);
             menuAlteracao(compra);
         }
@@ -51,7 +65,7 @@ namespace economia.user
                 Console.WriteLine("2. Remover Produto.");
                 Console.WriteLine("3. Gerar Sugestões");
                 Console.WriteLine("4. Imprimir Compra Atual.");
-                Console.WriteLine("5. Salvar e Sair");
+                Console.WriteLine("5. Imprimir e Sair");
                 Console.Write("Opção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 switch (escolha)
@@ -66,7 +80,7 @@ namespace economia.user
                         GerarSugestoes(compra);
                         break;
                     case 4:
-                        ImprimeLista(compra.Compras);
+                        Console.WriteLine(compra);
                         break;
                     case 5:
                         goto endwhilema;
@@ -103,9 +117,9 @@ namespace economia.user
         public static bool AceitarSugestao(){
             while(true)
             {
-                Console.WriteLine("Deseja aceitar a sugestao?");
+                Console.WriteLine("Deseja aceitar a sugestão?");
                 Console.WriteLine("1. Sim");
-                Console.WriteLine("2. Nao");
+                Console.WriteLine("2. Não");
                 Console.Write("Opção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 switch (escolha)
@@ -125,13 +139,13 @@ namespace economia.user
             while(true)
             {
                 escolha=0;
-                Console.WriteLine("\n1. Solucao Boa*: Troca produtos por mais baratos até que a compra esteja abaixo do custo maximo");
+                Console.WriteLine("\n1. Solução Boa*: Troca produtos por mais baratos até que a compra esteja abaixo do custo maximo");
                 Console.WriteLine("   ou todos produtos sejam os mais baratos");
-                Console.WriteLine("2. Solucao Barata*: Troca produtos por mais baratos até que todos estejam com o preço mais baixo");
+                Console.WriteLine("2. Solução Barata*: Troca produtos por mais baratos até que todos estejam com o preço mais baixo");
                 Console.WriteLine("   possível.");
-                Console.WriteLine("3. Solução Super-barata: Remove todos os produtos considerados superfluos e troca todos os produtos");
+                Console.WriteLine("3. Solução Super-barata: Remove todos os produtos considerados supérfluos e troca todos os produtos");
                 Console.WriteLine("   pelos mais baratos");
-                Console.WriteLine("   *: As soluções boa e barata, removerao produtos superfluos se o custo estiver acima do custo máximo");
+                Console.WriteLine("   *: As soluções boa e barata, removerão produtos supérfluos se o custo estiver acima do custo máximo");
                 Console.WriteLine("   desejado.");
                 Console.WriteLine("4. Imprimir Compra Atual.");
                 Console.WriteLine("5. Sair\n");
@@ -158,7 +172,7 @@ namespace economia.user
                             compra.Compras = sugestaoS;
                         break;
                     case 4:
-                        ImprimeLista(compra.Compras);
+                        Console.WriteLine(compra);
                         break;
                     case 5:
                         goto endwhilegs;
@@ -173,7 +187,7 @@ namespace economia.user
         }
         public static void Save(Compra compra)
         {
-
+            Dados.Salvar(compra.ToString());
         }
         //Adiciona Produtos na lista de compras.
         public static void RemoveProdutos(Compra compra)
@@ -186,12 +200,12 @@ namespace economia.user
                     Console.WriteLine("[{0}] - {1}", x, compra.Compras[x]);
                 }
                 Console.WriteLine("Deseja remover qual produto?");
-                Console.Write("[-1] - Sair\nOpcao: ");
+                Console.Write("[-1] - Sair\nOpção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 if(escolha == -1)
                     break;
                 else if(escolha < -1 || escolha >= compra.Compras.Count)
-                    Console.WriteLine("Produto nao encontrado.");
+                    Console.WriteLine("Produto não encontrado.");
                 else
                 {
                     Console.WriteLine(compra.Compras[escolha]);
@@ -223,12 +237,12 @@ namespace economia.user
                     Console.WriteLine("[{0}] - {1}", x, Mercado[x]);
                 }
                 Console.WriteLine("Deseja adicionar qual produto?");
-                Console.Write("[-1] - Sair\nOpcao: ");
+                Console.Write("[-1] - Sair\nOpção: ");
                 escolha = Int32.Parse(Console.ReadLine());
                 if(escolha == -1)
                     break;
                 else if(escolha < -1 || escolha >= Mercado.Count)
-                    Console.WriteLine("Produto nao encontrado.");
+                    Console.WriteLine("Produto não encontrado.");
                 else
                 {
                     Console.WriteLine(Mercado[escolha]);

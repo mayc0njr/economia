@@ -1,3 +1,4 @@
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -103,6 +104,15 @@ namespace economia.models
         }
         public List<Produto> MelhorCustoPossivel(bool superbarato = false){
             return MelhorarCusto(true, superbarato);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            Compras.ForEach(item => sb.Append(item.ToString() + "\n"));
+            sb.Append($"\nCusto Total: {Compras.Sum(item => item.Preco)}");
+            sb.Append($"\nCusto Máximo Desejado: {CustoMaximo}\n");
+            return sb.ToString();
         }
     }
 }
