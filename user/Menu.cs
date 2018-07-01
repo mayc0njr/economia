@@ -192,6 +192,7 @@ namespace economia.user
                     Console.WriteLine("Produto nao encontrado.");
                 else
                 {
+                    Console.WriteLine(compra.Compras[escolha]);
                     Console.Write("Digite a quantidade: ");
                     quantidade = int.Parse(Console.ReadLine());
                     if(quantidade < 0) quantidade = 0;
@@ -228,6 +229,7 @@ namespace economia.user
                     Console.WriteLine("Produto nao encontrado.");
                 else
                 {
+                    Console.WriteLine(Mercado[escolha]);
                     Console.Write("Digite a quantidade: ");
                     quantidade = int.Parse(Console.ReadLine());
                     if(quantidade < 0) quantidade = 0;
