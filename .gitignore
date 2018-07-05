@@ -12,6 +12,8 @@ project.lock.json
 *.user
 *.userosscache
 *.sln.docstates
+# Recursos
+[Rr]es/
 
 # Build results
 [Dd]ebug/
