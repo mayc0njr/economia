@@ -30,14 +30,14 @@ namespace economia.models
         public static void InitializeProdutos()
         {
             List<Produto> mercado = new List<Produto>();
-            var produtos = Csv.Split("\n");
+            var produtos = Csv.Split('\n');
             printArray<string>(produtos);
-            var nome = produtos[0].Split(",");
+            var nome = produtos[0].Split(',');
             printArray<string>(nome);
             for (var x = 1; x < produtos.Length; x++)
             {
                 var tipo = produtos[x];
-                var produto = tipo.Split(",");
+                var produto = tipo.Split(',');
                 for (var y = 1; y < produto.Length - 1; y++)
                 {
                     Produto p = new Produto(produto[0] + " " + nome[y], produto[0], Helper.ParseDecimal(produto[y]), Int32.Parse(produto[produto.Length - 1]));
@@ -50,7 +50,7 @@ namespace economia.models
         {
             var arquivo = $"res{ps}Compra{Now}.txt";
 
-            var print = $"{texto}\n\n Relatório gerado em: {DateTime.Now.ToString("dd/MM/yyyy - hh:mm")}";
+            var print = $"{texto}\n\nRelatório gerado em: {DateTime.Now.ToString("dd/MM/yyyy - HH:mm")}";
 
 
             File.WriteAllText(arquivo, print);
